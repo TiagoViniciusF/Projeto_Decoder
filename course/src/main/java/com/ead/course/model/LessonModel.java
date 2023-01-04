@@ -34,7 +34,8 @@ public class LessonModel implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime creationDate;
 
+    //FetchType.LAZY = Evita carregar dados de Module do BD sempre que chamar a entidade Lesson
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private ModuleModel module;
 }

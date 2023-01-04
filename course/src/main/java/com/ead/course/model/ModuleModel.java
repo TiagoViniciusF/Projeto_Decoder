@@ -33,10 +33,13 @@ public class ModuleModel implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime creationDate;
 
+    //FetchType.LAZY = Evita carregar dados de Course do BD sempre que chamar a entidade Module
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private CourseModel course;
+
+    //FetchType.LAZY = Evita carregar dados de Lessons do BD sempre que chamar a entidade Module
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "module")
+    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
     private Set<LessonModel> lessons;
 }
